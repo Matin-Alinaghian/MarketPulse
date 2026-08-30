@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>MarketPulse</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+</head>
+
+
+<body>
+
+
+    <!-- ================= HEADER ================= -->
+
+    <header class="header">
+
+    <div class="logo">
+        MarketPulse
+    </div>
+
+    <div class="market-intro">
+
+        <div class="market-title">
+            نبض بازار، در یک نگاه
+        </div>
+
+        <div class="market-subtitle">
+            قیمت‌ها و روند بازار ارز، طلا و سکه
+        </div>
+
+    </div>
+
+    <button class="refresh-btn">
+        ↻ بروزرسانی
+    </button>
+
+</header>
+
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="container">
+
+
+        <!-- ================= HERO ================= -->
+
+        <section class="hero">
+
+            <div>
+
+                <h1>
+                    بازار امروز
+                </h1>
+
+                <p>
+                    قیمت‌ها را لحظه‌ای دنبال کنید
+                </p>
+
+            </div>
+
+
+            <div class="update-time">
+
+                آخرین بروزرسانی:
+
+                <span id="update-time">
+                    --:--
+                </span>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= PRICE CARDS ================= -->
+
+        <!-- ================= PRICE CARDS ================= -->
+
+<section class="market-grid">
+
+
+    <!-- ================= DOLLAR ================= -->
+
+    <div class="price-card dollar-card">
+
+        <div class="card-image-wrapper">
+
+            <img
+                src="../static/images/image.png.jpeg"
+                alt="دلار"
+            >
+
+        </div>
+
+
+        <div class="card-content">
+
+            <div class="card-title-row">
+
+                <span class="card-code">
+                    USD
+                </span>
+
+                <h3>
+                    دلار
+                </h3>
+
+            </div>
+
+
+            <strong id="dollar-price">
+                ---
+            </strong>
+
+
+            <span class="change positive">
+                +0.00%
+            </span>
+
+        </div>
+
+
+        <div class="mini-chart dollar-mini-chart"></div>
+
+    </div>
+
+
+
+    <!-- ================= EURO ================= -->
+
+    <div class="price-card euro-card">
+
+        <div class="card-image-wrapper">
+
+            <img
+                src="../static/images/image.png (1).jpeg"
+                alt="یورو"
+            >
+
+        </div>
+
+
+        <div class="card-content">
+
+            <div class="card-title-row">
+
+                <span class="card-code">
+                    EUR
+                </span>
+
+                <h3>
+                    یورو
+                </h3>
+
+            </div>
+
+
+            <strong id="euro-price">
+                ---
+            </strong>
+
+
+            <span class="change positive">
+                +0.00%
+            </span>
+
+        </div>
+
+
+        <div class="mini-chart euro-mini-chart"></div>
+
+    </div>
+
+
+
+    <!-- ================= GOLD ================= -->
+
+    <div class="price-card gold-card">
+
+        <div class="card-image-wrapper">
+
+            <img
+                src="../static/images/image.png (2).jpeg"
+                alt="طلای ۱۸ عیار"
+            >
+
+        </div>
+
+
+        <div class="card-content">
+
+            <div class="card-title-row">
+
+                <span class="card-code">
+                    GOLD
+                </span>
+
+                <h3>
+                    طلای ۱۸ عیار
+                </h3>
+
+            </div>
+
+
+            <strong id="gold-price">
+                ---
+            </strong>
+
+
+            <span class="change positive">
+                +0.00%
+            </span>
+
+        </div>
+
+
+        <div class="mini-chart gold-mini-chart"></div>
+
+    </div>
+
+
+
+    <!-- ================= COIN ================= -->
+
+    <div class="price-card coin-card">
+
+        <div class="card-image-wrapper">
+
+            <img
+                src="../static/images/image.png (3).jpeg"
+                alt="سکه امامی"
+            >
+
+        </div>
+
+
+        <div class="card-content">
+
+            <div class="card-title-row">
+
+                <span class="card-code">
+                    COIN
+                </span>
+
+                <h3>
+                    سکه امامی
+                </h3>
+
+            </div>
+
+
+            <strong id="coin-price">
+                ---
+            </strong>
+
+
+            <span class="change negative">
+                -0.00%
+            </span>
+
+        </div>
+
+
+        <div class="mini-chart coin-mini-chart"></div>
+
+    </div>
+
+
+</section>
+
+
+        <!-- ================= PRICE CHART ================= -->
+
+        <section class="chart-section">
+
+
+            <div class="section-header">
+
+                <div>
+
+                    <h2>
+                        روند قیمت
+                    </h2>
+
+                    <p>
+                        بررسی تغییرات قیمت در بازه‌های مختلف
+                    </p>
+
+                </div>
+
+
+                <select id="assetSelect">
+
+                    <option value="USD_RLS">
+                        دلار
+                    </option>
+
+                    <option value="EUR_RLS">
+                        یورو
+                    </option>
+
+                    <option value="GOLD_18_RLS">
+                        طلای ۱۸ عیار
+                    </option>
+
+                    <option value="SEKKEH_RLS">
+                        سکه امامی
+                    </option>
+
+                </select>
+
+            </div>
+
+
+
+            <!-- بازه زمانی -->
+
+            <div class="period-buttons">
+
+    <button
+        data-period="day"
+        class="active">
+        روز
+    </button>
+
+    <button
+        data-period="week">
+        هفته
+    </button>
+
+    <button
+        data-period="month">
+        ماه
+    </button>
+
+</div>
+
+
+
+            <!-- اطلاعات نمودار -->
+
+            <div class="chart-info">
+
+
+                <div>
+
+                    <span id="chartAssetName">
+                        دلار
+                    </span>
+
+
+                    <strong id="chartCurrentPrice">
+                        ---
+                    </strong>
+
+                </div>
+
+
+                <div
+                    id="chartChange"
+                    class="positive">
+
+                    +0.00%
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- خود نمودار -->
+
+            <div class="chart">
+                <div id="chartLoading" class="chart-loading">
+    در حال دریافت اطلاعات...
+</div>
+
+                <canvas id="priceChart"></canvas>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- ================= COMPARISON ================= -->
+
+        <section class="compare-section">
+
+
+            <div class="section-header">
+
+                <div>
+
+                    <h2>
+                        مقایسه دارایی‌ها
+                    </h2>
+
+                    <p>
+                        عملکرد دو دارایی را با هم مقایسه کنید
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- انتخاب دارایی‌ها -->
+
+            <div class="compare-controls">
+
+
+                <select id="compareFirst">
+
+                    <option value="USD_RLS">
+                        دلار
+                    </option>
+
+                    <option value="EUR_RLS">
+                        یورو
+                    </option>
+
+                    <option value="GOLD_18_RLS">
+                        طلای ۱۸ عیار
+                    </option>
+
+                    <option value="SEKKEH_RLS">
+                        سکه امامی
+                    </option>
+
+                </select>
+
+
+
+                <span>
+                    VS
+                </span>
+
+
+
+                <select id="compareSecond">
+
+                    <option value="GOLD_18_RLS">
+                        طلای ۱۸ عیار
+                    </option>
+
+                    <option value="USD_RLS">
+                        دلار
+                    </option>
+
+                    <option value="EUR_RLS">
+                        یورو
+                    </option>
+
+                    <option value="SEKKEH_RLS">
+                        سکه امامی
+                    </option>
+
+                </select>
+
+
+            </div>
+
+
+
+            <!-- نتیجه مقایسه -->
+
+            <div class="compare-result">
+
+
+                <!-- دارایی اول -->
+
+                <div class="compare-card">
+
+                    <span id="compareName1">
+                        دلار
+                    </span>
+
+
+                    <strong id="comparePrice1">
+                        ---
+                    </strong>
+
+
+                    <small id="compareChange1">
+                        ---
+                    </small>
+
+                </div>
+
+
+
+                <!-- VS -->
+
+                <div class="compare-vs">
+                    VS
+                </div>
+
+
+
+                <!-- دارایی دوم -->
+
+                <div class="compare-card">
+
+                    <span id="compareName2">
+                        طلای ۱۸ عیار
+                    </span>
+
+
+                    <strong id="comparePrice2">
+                        ---
+                    </strong>
+
+
+                    <small id="compareChange2">
+                        ---
+                    </small>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- برنده مقایسه -->
+
+            <div
+                id="compareWinner"
+                class="compare-winner">
+
+                ---
+
+            </div>
+            <div class="compare-chart">
+
+    <canvas id="comparisonChart"></canvas>
+
+</div>
+
+
+        </section>
+
+
+
+        <!-- ================= MARKET TABLE ================= -->
+
+        <section class="market-table-section">
+
+
+            <div class="section-header">
+
+                <div>
+
+                    <h2>
+                        وضعیت بازار
+                    </h2>
+
+                    <p>
+                        آخرین اطلاعات دارایی‌ها
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="table-container">
+
+
+                <table>
+
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                دارایی
+                            </th>
+
+                            <th>
+                                قیمت
+                            </th>
+
+                            <th>
+                                تغییر
+                            </th>
+
+                            <th>
+                                کمترین
+                            </th>
+
+                            <th>
+                                بیشترین
+                            </th>
+
+                            <th>
+                                بروزرسانی
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+
+                    <tbody id="marketTableBody">
+
+                        <!--
+                            اطلاعات جدول
+                            توسط JavaScript
+                            وارد می‌شود
+                        -->
+
+                    </tbody>
+
+
+                </table>
+
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        <p>
+MarketPulse © 2026 • Created by Matin Alinaghian        </p>
+
+    </footer>
+
+
+
+    <!-- ================= SCRIPTS ================= -->
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/chart.js">
+    </script>
+
+
+    <script
+        src="{{ url_for('static', filename='js/script.js') }}">
+    </script>
+
+
+</body>
+
+</html>
