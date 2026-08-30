@@ -791,7 +791,6 @@ def should_update_today():
         return True
 
     return False
-
 def auto_update_worker():
 
     print(
@@ -841,12 +840,7 @@ def auto_update_worker():
                 error
             )
 
-        time.sleep(600)
-
-        time.sleep(
-            6000
-        )
-
+        time.sleep(60)
 def start_auto_update():
 
     worker = threading.Thread(
@@ -1033,14 +1027,12 @@ def market_status():
 
     })
 
+start_auto_update()
+
+
 if __name__ == "__main__":
 
-    start_auto_update()
-
     app.run(
-
         debug=True,
-
         use_reloader=False
-
     )
